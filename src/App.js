@@ -1,25 +1,65 @@
-import logo from './logo.svg';
 import './App.css';
+ import Screen from './components/screen'
+ import Buttons from './components/buttons'
+import React, { Component } from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+
+  constructor(){
+    super()
+    this.state={
+      highlightedElement:"music",
+      selectedElement:'settings'
+    } 
+  }
+
+  changeSelectedElement=(newElement)=>{
+    this.setState({
+      selectedElement: newElement
+    })
+  }
+
+  changeHighlightedElement=(newElement)=>{
+    this.setState({
+      highlightedElement: newElement
+    })
+  }
+
+  render() {
+    const { highlightedElement, selectedElement } = this.state
+    return (
+      <div className="App">
+        <div style={styles.ipod}>
+          <div className="childContainer">
+            <Screen 
+              highlightedElement={highlightedElement}
+              selectedElement={selectedElement}
+            />
+          </div>
+          <div className="childContainer">
+            <Buttons 
+            changeSelectedElement={this.changeSelectedElement}
+            changeHighlightedElement={this.changeHighlightedElement}
+            highlightedElement={highlightedElement}
+            selectedElement={selectedElement}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
-export default App;
+const styles={
+  ipod:{
+    height: '75%',
+    width: '40%',
+    backgroundColor: 'gray',
+    borderRadius: '10px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '5px'
+  }
+}
+
+
