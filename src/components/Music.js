@@ -5,7 +5,11 @@ export default class Music extends Component {
   render() {
     return (
       <div>
-        <ContentList />
+        {/* <ContentList 
+          itemList={['playlist','albums','singers']}
+          highlightedElement='playlist'
+        /> */}
+        music
       </div>
     )
   }

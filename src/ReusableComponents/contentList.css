@@ -1,7 +1,33 @@
 .highlight {
   color: rgb(47, 65, 230);
+  background-color: rgb(191, 191, 235);
+  width: 100%;
 }
 
 .select {
   color: blueviolet;
+}
+
+.item {
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
+  flex-grow: 1;
+  margin: auto;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+.horizontal-flex {
+  display: flex;
+  height: 100%;
+}
+
+.horizontal-flex > div {
+  width: 50%;
+  height: 100%;
 }

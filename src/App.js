@@ -8,21 +8,30 @@ export default class App extends Component {
   constructor(){
     super()
     this.state={
-      highlightedElement:"music",
-      selectedElement:'settings'
+      highlightedElement:"settings",
+      selectedElement:null,
+      elements:['settings', 'music', 'games']
     } 
   }
 
   changeSelectedElement=(newElement)=>{
+    console.log('changeSelected element');
     this.setState({
-      selectedElement: newElement
+      selectedElement: newElement,
+      // highlightedElement: null
     })
   }
 
-  changeHighlightedElement=(newElement)=>{
-    this.setState({
-      highlightedElement: newElement
-    })
+  changeHighlightedElement=()=>{
+    this.setState((prevState)=>{
+      const{ elements, highlightedElement} = prevState
+      let length = elements.length
+      let idx = elements.indexOf(highlightedElement)
+      if(idx === length-1){
+        return {highlightedElement: elements[0]}  
+      }
+      return {highlightedElement: elements[idx+1]}
+    },()=>console.log(this.state))
   }
 
   render() {
@@ -36,7 +45,7 @@ export default class App extends Component {
               selectedElement={selectedElement}
             />
           </div>
-          <div className="childContainer">
+          <div className="childContainer center buttonContainer">
             <Buttons 
             changeSelectedElement={this.changeSelectedElement}
             changeHighlightedElement={this.changeHighlightedElement}

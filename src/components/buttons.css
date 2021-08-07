@@ -1,4 +1,4 @@
-.circleBase {
+/* .circleBase {
   border-radius: 50%;
 }
 
@@ -31,4 +31,54 @@
   border-color: blue;
   background-color: rgba(0, 0, 0, 0);
   pointer-events: none;
+} */
+
+.white {
+  height: 200px;
+  width: 200px;
+  background-color: white;
+  position: relative;
+  border-radius: 50%;
+}
+
+.gray {
+  height: 100px;
+  width: 100px;
+  background-color: gray;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  border-radius: 50%;
+}
+
+.gray:hover {
+  cursor: pointer;
+}
+
+.btn {
+  border: none;
+}
+.btn:hover {
+  cursor: pointer;
+}
+
+.button-top {
+  position: absolute;
+  top: 15px;
+  left: 75px;
+}
+.button-right {
+  position: absolute;
+  top: 90px;
+  right: 10px;
+}
+.button-bottom {
+  position: absolute;
+  top: 165px;
+  left: 90px;
+}
+.button-left {
+  position: absolute;
+  top: 90px;
+  left: 10px;
 }

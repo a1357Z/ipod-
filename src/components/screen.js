@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import ContentList from '../ReusableComponents/contentList'
+import Games from './Games'
+import Music from './Music'
+import Settings from './Settings'
 
 export default class Screen extends Component {
 
@@ -9,18 +12,33 @@ export default class Screen extends Component {
       itemList:['settings','music', 'games']
     }
   }
+  
+  showSelectedElement=()=>{
+    const { selectedElement } = this.props
+    if(selectedElement === 'settings'){
+      return <Settings />
+    }else if(selectedElement === 'music'){
+      return <Music />
+    }else{
+      return <Games />
+    }
+  }
 
   render() {
     const{ highlightedElement, selectedElement } = this.props
     const {itemList} = this.state
     return (
-      <div>
-        <ContentList 
-          itemList={itemList}
-          highlightedElement={highlightedElement}
-          selectedElement={selectedElement}
-        />
-      </div>
+      <>
+        { selectedElement && this.showSelectedElement()}
+        { !selectedElement && <ContentList 
+            itemList={itemList}
+            highlightedElement={highlightedElement}
+            selectedElement={selectedElement}
+          /> 
+        }
+        
+
+      </>
     )
   }
 }
