@@ -1,50 +1,63 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './buttons.css'
+import ZingTouch from 'zingtouch'
 const Buttons = (props) => {
-  
-  const {changeSelectedElement, changeHighlightedElement , highlightedElement, selectedElement} = props
-  
-  const addEventListeners=()=>{
-    // const target = document.querySelector('.white')
-    // console.log('target is ',target);
-    // target.addEventListener('mousedown',(e)=>{
-    //   console.log('mousedown event on ',e.currentTarget);
-    //   // e.currentTarget.addEventListener('onmouseover',(event)=>{
-    //   //   console.log('onmouseover event on ',event.target);
-    //   //   changeHighlightedElement()
-    //   // })
+  const {
+    changeSelectedElement,
+    changeHighlightedElement,
+    highlightedElement,
+    selectedElement,
+  } = props
 
-    // })
-    // target.addEventListener('onmouseup',(e)=>{
-    //   console.log('onmouseup event on ', e.currentTarget);
-    //  // e.currentTarget.removeEventListener('onmouseover',()=>{})
-    // })
-  }
+  useEffect(() => {
+    var myElement = document.getElementById('white')
+    var zt = new ZingTouch.Region(myElement)
+    var rotate = new ZingTouch.Rotate()
+    zt.bind(
+      myElement,
+      rotate,
+      function (e) {
+        changeHighlightedElement()
+        console.log('rotation detail', e.detail)
+      },
+      false
+    )
+  }, [])
 
-  const handleMenuClick=()=>{
-    if(selectedElement){
+  const handleMenuClick = () => {
+    if (selectedElement) {
       changeSelectedElement(null)
     }
   }
 
   return (
     <div>
-      {/* <div class="circleBase type1" onClick={()=>changeSelectedElement(highlightedElement)}></div> */}
-      <div className="white" onClick={()=>{changeHighlightedElement(); console.log('changeHighlighted element');}}>
-        <button className="btn button-top" onClick={handleMenuClick}>menu</button>
-        <button className="btn button-right"><i className="fas fa-step-forward"></i></button>
-        <button className="btn button-bottom"><i className="fas fa-pause"></i></button>
-        <button className="btn button-left"><i className="fas fa-step-backward"></i></button>
-        <div className="gray" onClick={(e)=>{
-          if(selectedElement){
-            return
-          }
-          changeSelectedElement(highlightedElement)
-          e.preventDefault()
-        }}></div>
+      <div className="white" id="white">
+        <button className="btn button-top" onClick={handleMenuClick}>
+          menu
+        </button>
+        <button className="btn button-right">
+          <i className="fas fa-step-forward"></i>
+        </button>
+        <button className="btn button-bottom">
+          <i className="fas fa-pause"></i>
+        </button>
+        <button className="btn button-left">
+          <i className="fas fa-step-backward"></i>
+        </button>
+        <div
+          className="gray"
+          onClick={(e) => {
+            if (selectedElement) {
+              e.stopPropagation()
+              return
+            }
+            changeSelectedElement(highlightedElement)
+            e.preventDefault()
+            e.stopPropagation()
+          }}
+        ></div>
       </div>
-      {/* {addEventListeners()} */}
-      {/* <button onClick={()=>changeHighlightedElement(highlightedElement)}>changeSelectedElement</button> */}
     </div>
   )
 }
